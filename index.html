@@ -175,7 +175,10 @@
 
       try {
         const response = await fetch("/" + mode, { method: "POST", body: formData });
-        if (!response.ok) throw new Error("Server error " + response.status);
+        if (!response.ok) {
+          const data = await response.json().catch(() => ({}));
+          throw new Error(data.detail || "Sorry, that file couldn't be converted.");
+        }
         const blob = await response.blob();
         const baseName = selectedFile.name.replace(/\.[^.]+$/, "");
         download.href = URL.createObjectURL(blob);
@@ -183,7 +186,7 @@
         download.style.display = "block";
         statusBox.textContent = "Done! Your file is ready.";
       } catch (err) {
-        statusBox.textContent = "Sorry, that file couldn't be converted. Please try another file.";
+        statusBox.textContent = err.message;
         statusBox.className = "error";
       } finally {
         convertBtn.disabled = false;
