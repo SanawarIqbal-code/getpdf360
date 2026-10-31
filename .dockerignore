@@ -1,0 +1,8 @@
+venv/
+files/
+.git/
+__pycache__/
+*.pdf
+*.docx
+*.doc
+convert.py

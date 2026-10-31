@@ -1,3 +1,4 @@
+import os
 import time
 import uuid
 import shutil
@@ -10,7 +11,7 @@ from fastapi.responses import FileResponse
 from starlette.background import BackgroundTask
 
 # ---------- Settings ----------
-LIBREOFFICE = r"C:\Program Files\LibreOffice\program\soffice.exe"
+LIBREOFFICE = os.environ.get("LIBREOFFICE", r"C:\Program Files\LibreOffice\program\soffice.exe")
 PDF2DOCX = shutil.which("pdf2docx") or "pdf2docx"
 WORK_DIR = Path("files")
 MAX_FILE_SIZE = 20 * 1024 * 1024   # 20 MB
