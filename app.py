@@ -7,20 +7,26 @@ import subprocess
 from pathlib import Path
 
 from fastapi import FastAPI, UploadFile, File, HTTPException
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 from starlette.background import BackgroundTask
 
 # ---------- Settings ----------
 LIBREOFFICE = os.environ.get("LIBREOFFICE", r"C:\Program Files\LibreOffice\program\soffice.exe")
 PDF2DOCX = shutil.which("pdf2docx") or "pdf2docx"
 WORK_DIR = Path("files")
+PAGES_DIR = Path("pages")
+STATIC_DIR = Path("static")
 MAX_FILE_SIZE = 20 * 1024 * 1024   # 20 MB
 CONVERT_TIMEOUT = 120              # seconds
 KEEP_FILES_FOR = 60 * 60           # 1 hour
 CLEANUP_EVERY = 10 * 60            # 10 minutes
 
 WORK_DIR.mkdir(exist_ok=True)
-app = FastAPI(title="My PDF Converter")
+
+# docs_url=None hides the /docs test page from the public
+app = FastAPI(title="GetPDF360", docs_url=None, redoc_url=None, openapi_url=None)
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
 # ---------- Helpers ----------
@@ -87,7 +93,19 @@ def cleanup_loop():
 threading.Thread(target=cleanup_loop, daemon=True).start()
 
 
-# ---------- Endpoints ----------
+def send_result(output_path: Path, name: str, media_type: str, job_dir: Path):
+    """Send the converted file, then delete the job folder.
+    The job id header lets the page confirm the deletion (privacy receipt)."""
+    return FileResponse(
+        output_path,
+        filename=name,
+        media_type=media_type,
+        headers={"X-Job-Id": job_dir.name, "Cache-Control": "no-store"},
+        background=BackgroundTask(delete_job, job_dir),
+    )
+
+
+# ---------- Conversion endpoints ----------
 @app.post("/word-to-pdf")
 def word_to_pdf(file: UploadFile = File(...)):
     extension = Path(file.filename or "").suffix.lower()
@@ -112,12 +130,7 @@ def word_to_pdf(file: UploadFile = File(...)):
         raise
 
     name = Path(file.filename).stem + ".pdf"
-    return FileResponse(
-        output_path,
-        filename=name,
-        media_type="application/pdf",
-        background=BackgroundTask(delete_job, job_dir),
-    )
+    return send_result(output_path, name, "application/pdf", job_dir)
 
 
 @app.post("/pdf-to-word")
@@ -139,14 +152,54 @@ def pdf_to_word(file: UploadFile = File(...)):
         raise
 
     name = Path(file.filename).stem + ".docx"
-    return FileResponse(
-        output_path,
-        filename=name,
-        media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        background=BackgroundTask(delete_job, job_dir),
+    return send_result(
+        output_path, name,
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        job_dir,
     )
+
+
+@app.get("/api/deleted/{job_id}")
+def job_deleted(job_id: str):
+    """Tells the page whether a finished job's files are gone (privacy receipt)."""
+    try:
+        uuid.UUID(job_id)
+    except ValueError:
+        raise HTTPException(400, "Unknown job.")
+    return JSONResponse({"deleted": not (WORK_DIR / job_id).exists()},
+                        headers={"Cache-Control": "no-store"})
+
+
+# ---------- Pages ----------
+def page(name: str):
+    return FileResponse(PAGES_DIR / name, media_type="text/html")
 
 
 @app.get("/")
 def home():
-    return FileResponse("index.html")
+    return page("index.html")
+
+
+@app.get("/word-to-pdf")
+def word_to_pdf_page():
+    return page("word-to-pdf.html")
+
+
+@app.get("/pdf-to-word")
+def pdf_to_word_page():
+    return page("pdf-to-word.html")
+
+
+@app.get("/robots.txt")
+def robots():
+    return FileResponse(STATIC_DIR / "robots.txt", media_type="text/plain")
+
+
+@app.get("/sitemap.xml")
+def sitemap():
+    return FileResponse(STATIC_DIR / "sitemap.xml", media_type="application/xml")
+
+
+@app.get("/favicon.ico")
+def favicon():
+    return FileResponse(STATIC_DIR / "img" / "favicon.ico", media_type="image/x-icon")
