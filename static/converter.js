@@ -9,6 +9,9 @@
   var outExt = box.dataset.out;                  // e.g. .pdf
   var outLabel = box.dataset.outLabel;           // e.g. PDF
   var inLabel = box.dataset.inLabel;             // e.g. Word
+  var suffix = box.dataset.suffix || "";         // e.g. -compressed
+  var verb = box.dataset.verb || "Converting";   // e.g. Compressing
+  var showSaving = !!box.dataset.saving;         // show "2.1 MB → 640 KB"
 
   var input = box.querySelector("input[type=file]");
   var drop = box.querySelector(".drop");
@@ -89,12 +92,14 @@
 
     setStatus("");
     resetSteps();
-    workingText.textContent = "Converting " + file.name + "…";
+    workingText.textContent = verb + " " + file.name + "…";
     show("working");
 
     var started = new Date();
     var form = new FormData();
     form.append("file", file);
+    var level = box.querySelector("input[name=level]:checked");
+    if (level) form.append("level", level.value);
 
     fetch(endpoint, { method: "POST", body: form })
       .then(function (response) {
@@ -108,14 +113,22 @@
       })
       .then(function (res) {
         var finished = new Date();
-        var outName = file.name.replace(/\.[^.]+$/, "") + outExt;
+        var outName = file.name.replace(/\.[^.]+$/, "") + suffix + outExt;
         if (blobUrl) URL.revokeObjectURL(blobUrl);
         blobUrl = URL.createObjectURL(res.blob);
         link.href = blobUrl;
         link.download = outName;
         linkText.textContent = "Download " + outName;
         resultName.textContent = outName;
-        resultMeta.textContent = size(res.blob.size) + " · converted in " + ((finished - started) / 1000).toFixed(1) + " seconds";
+        var secs = ((finished - started) / 1000).toFixed(1) + " seconds";
+        if (showSaving) {
+          var saved = Math.round((1 - res.blob.size / file.size) * 100);
+          resultMeta.textContent = saved > 0
+            ? size(file.size) + " → " + size(res.blob.size) + " · " + saved + "% smaller"
+            : "Already well compressed, so we kept your original (" + size(file.size) + ")";
+        } else {
+          resultMeta.textContent = size(res.blob.size) + " · converted in " + secs;
+        }
         markStep(steps.up, started);
         markStep(steps.back, finished);
         show("done");

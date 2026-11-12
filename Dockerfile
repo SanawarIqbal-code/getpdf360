@@ -1,9 +1,10 @@
 FROM python:3.12-slim
 
-# Install LibreOffice (Writer only) and common fonts
+# Install LibreOffice (Writer only), Ghostscript and common fonts
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
        libreoffice-writer \
+       ghostscript \
        fonts-dejavu-core \
        fonts-liberation \
        fonts-crosextra-carlito \

@@ -35,16 +35,11 @@
         <a href="/#tools">All tools</a>
         <a href="/word-to-pdf">Word to PDF</a>
         <a href="/pdf-to-word">PDF to Word</a>
+        <a href="/compress-pdf">Compress PDF</a>
       </nav>
     </div>
     <div class="wrap switch-row">
-      <nav class="switch" aria-label="Choose a tool">
-        <a href="/word-to-pdf">Word to PDF</a>
-        <a href="/pdf-to-word" aria-current="page">PDF to Word</a>
-        <span>Merge PDF · soon</span>
-        <span>Compress PDF · soon</span>
-        <span>JPG to PDF · soon</span>
-      </nav>
+      <nav class="switch" aria-label="Choose a tool"><a href="/word-to-pdf">Word to PDF</a><a href="/pdf-to-word" aria-current="page">PDF to Word</a><a href="/compress-pdf">Compress PDF</a><span>Merge PDF · soon</span><span>Split PDF · soon</span><span>JPG to PDF · soon</span></nav>
     </div>
   </header>
   <main id="main">
@@ -55,7 +50,7 @@
         <p class="lede">Turn a PDF into an editable Word document. Free, with no sign-up and no watermark.</p>
       </div>
       <div class="tool-grid">
-      <div class="converter" data-converter data-endpoint="/pdf-to-word" data-accept=".pdf" data-out=".docx" data-out-label="Word" data-in-label="PDF">
+      <div class="converter" data-converter data-endpoint="/pdf-to-word" data-accept=".pdf" data-out=".docx" data-out-label="Word" data-in-label="PDF" data-suffix="" data-verb="Converting" data-saving="">
         <div data-view="pick">
           <label class="drop">
             <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#18225A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 17v-6M9.5 13.5 12 11l2.5 2.5"/></svg>
@@ -111,7 +106,7 @@
     </section>
 
     <section class="band"><div class="wrap section faq"><h2>PDF to Word questions</h2><div class="faq-list"><div class="faq-item"><h3>How do I convert a PDF to Word for free?</h3><p>Select your PDF in the box above. It converts straight away; then download your .docx file. There is no sign-up and no cost.</p></div><div class="faq-item"><h3>Can I edit the Word file?</h3><p>Yes. You get a normal .docx file that opens in Microsoft Word, Google Docs, Pages and LibreOffice.</p></div><div class="faq-item"><h3>Does it work with scanned PDFs?</h3><p>Not yet. A scanned PDF is a picture of the page, so it has no text to convert. It works with PDFs made from a computer, where you can select the text.</p></div><div class="faq-item"><h3>Will the layout be exactly the same?</h3><p>Text, paragraphs and simple tables come through well. Complex layouts with many columns or text boxes may need small fixes afterwards.</p></div><div class="faq-item"><h3>What happens to my PDF?</h3><p>It is uploaded over HTTPS, converted on our server in London and deleted as soon as the Word file is sent back to you.</p></div></div></div></section>
-    <section class="wrap section"><h2 style="font-size:24px;line-height:30px">More free tools</h2><div class="more"><a href="/word-to-pdf">Word to PDF</a><span>Merge PDF · soon</span><span>Compress PDF · soon</span><span>JPG to PDF · soon</span></div></section>
+    <section class="wrap section"><h2 style="font-size:24px;line-height:30px">More free tools</h2><div class="more"><a href="/word-to-pdf">Word to PDF</a><a href="/compress-pdf">Compress PDF</a><span>Merge PDF · soon</span><span>Split PDF · soon</span><span>JPG to PDF · soon</span></div></section>
   </main>
   <footer class="site-footer">
     <div class="wrap foot">
@@ -129,6 +124,11 @@
           <strong>Convert from PDF</strong>
           <a href="/pdf-to-word">PDF to Word</a>
           <span>PDF to Excel (soon)</span>
+        </nav>
+        <nav aria-label="Optimise PDF">
+          <strong>Optimise PDF</strong>
+          <a href="/compress-pdf">Compress PDF</a>
+          <span>Merge PDF (soon)</span>
         </nav>
         <nav aria-label="GetPDF360">
           <strong>GetPDF360</strong>

@@ -219,3 +219,13 @@ a.tool:hover { border-color: var(--navy); }
 @media (max-width: 560px) { .drop { min-height: 260px; padding: 30px 16px 22px; } .drop-btn { font-size: 18px; padding: 16px 30px; } .working { min-height: 260px; } }
 .drop .note { display: block; max-width: 34ch; }
 .drop .note svg { display: inline; vertical-align: -2px; margin-right: 6px; }
+.levels { border: 0; margin: 0 0 12px; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.level { cursor: pointer; }
+.level input { position: absolute; opacity: 0; pointer-events: none; }
+.level > span { display: block; height: 100%; border: 2px solid var(--rule); border-radius: 14px; padding: 10px 12px; background: var(--sheet); transition: border-color .15s, background .15s; }
+.level strong { display: block; font-size: 15px; color: var(--navy); }
+.level span span { display: block; font-size: 13px; line-height: 1.35; color: var(--muted); margin-top: 2px; }
+.level:hover > span { border-color: var(--ink-soft); }
+.level input:checked + span { border-color: var(--navy); background: var(--yellow-soft); box-shadow: inset 0 0 0 1px var(--navy); }
+.level input:focus-visible + span { outline: 3px solid var(--navy); outline-offset: 2px; }
+@media (max-width: 560px) { .levels { grid-template-columns: 1fr; } .level > span { display: flex; gap: 8px; align-items: baseline; } .level span span { margin-top: 0; } }

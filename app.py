@@ -1,4 +1,5 @@
 import os
+import glob
 import time
 import uuid
 import shutil
@@ -6,7 +7,7 @@ import threading
 import subprocess
 from pathlib import Path
 
-from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.background import BackgroundTask
@@ -14,6 +15,26 @@ from starlette.background import BackgroundTask
 # ---------- Settings ----------
 LIBREOFFICE = os.environ.get("LIBREOFFICE", r"C:\Program Files\LibreOffice\program\soffice.exe")
 PDF2DOCX = shutil.which("pdf2docx") or "pdf2docx"
+
+
+def find_ghostscript() -> str:
+    """Ghostscript is 'gs' on Linux and 'gswin64c' on Windows."""
+    if os.environ.get("GHOSTSCRIPT"):
+        return os.environ["GHOSTSCRIPT"]
+    for name in ("gs", "gswin64c"):
+        if shutil.which(name):
+            return shutil.which(name)
+    found = sorted(glob.glob(r"C:\Program Files\gs\*\bin\gswin64c.exe"))
+    return found[-1] if found else "gs"
+
+
+GHOSTSCRIPT = find_ghostscript()
+# Compression levels: how much images are shrunk
+COMPRESS_LEVELS = {
+    "recommended": "/ebook",   # 150 dpi images
+    "strong": "/screen",       # 72 dpi images, smallest
+    "light": "/printer",       # 300 dpi images, best quality
+}
 WORK_DIR = Path("files")
 PAGES_DIR = Path("pages")
 STATIC_DIR = Path("static")
@@ -159,6 +180,37 @@ def pdf_to_word(file: UploadFile = File(...)):
     )
 
 
+@app.post("/compress-pdf")
+def compress_pdf(file: UploadFile = File(...), level: str = Form("recommended")):
+    extension = Path(file.filename or "").suffix.lower()
+    if extension != ".pdf":
+        raise HTTPException(400, "Please upload a .pdf file.")
+    setting = COMPRESS_LEVELS.get(level, "/ebook")
+
+    job_dir = new_job_dir()
+    try:
+        input_path = save_upload(file, job_dir, ".pdf")
+        check_signature(input_path, "pdf")
+        output_path = job_dir / "output.pdf"
+        run_command([
+            GHOSTSCRIPT, "-sDEVICE=pdfwrite", "-dCompatibilityLevel=1.5",
+            f"-dPDFSETTINGS={setting}", "-dDetectDuplicateImages=true",
+            "-dNOPAUSE", "-dQUIET", "-dBATCH", "-dSAFER",
+            f"-sOutputFile={output_path}", str(input_path),
+        ])
+        if not output_path.exists():
+            raise HTTPException(500, "Sorry, that PDF couldn't be compressed.")
+        # Never hand back a bigger file: keep the original if it didn't shrink
+        if output_path.stat().st_size >= input_path.stat().st_size:
+            output_path = input_path
+    except Exception:
+        delete_job(job_dir)
+        raise
+
+    name = Path(file.filename).stem + "-compressed.pdf"
+    return send_result(output_path, name, "application/pdf", job_dir)
+
+
 @app.get("/api/deleted/{job_id}")
 def job_deleted(job_id: str):
     """Tells the page whether a finished job's files are gone (privacy receipt)."""
@@ -188,6 +240,11 @@ def word_to_pdf_page():
 @app.get("/pdf-to-word")
 def pdf_to_word_page():
     return page("pdf-to-word.html")
+
+
+@app.get("/compress-pdf")
+def compress_pdf_page():
+    return page("compress-pdf.html")
 
 
 @app.get("/robots.txt")
