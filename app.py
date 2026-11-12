@@ -82,8 +82,8 @@ def check_signature(path: Path, kind: str):
         start = f.read(8)
     if kind == "pdf" and not start.startswith(b"%PDF"):
         raise HTTPException(400, "This is not a valid PDF file.")
-    if kind == "word" and not (start.startswith(b"PK\x03\x04") or start.startswith(b"\xd0\xcf\x11\xe0")):
-        raise HTTPException(400, "This is not a valid Word file.")
+    if kind in ("word", "office") and not (start.startswith(b"PK\x03\x04") or start.startswith(b"\xd0\xcf\x11\xe0")):
+        raise HTTPException(400, "This is not a valid Word file." if kind == "word" else "This file isn't a valid document.")
 
 
 def run_command(command: list[str]):
@@ -152,6 +152,43 @@ def word_to_pdf(file: UploadFile = File(...)):
 
     name = Path(file.filename).stem + ".pdf"
     return send_result(output_path, name, "application/pdf", job_dir)
+
+
+def office_to_pdf(file: UploadFile, allowed: tuple, label: str):
+    """PowerPoint / Excel / Word to PDF with LibreOffice."""
+    extension = Path(file.filename or "").suffix.lower()
+    if extension not in allowed:
+        raise HTTPException(400, f"Please upload a {label} file ({', '.join(allowed)}).")
+
+    job_dir = new_job_dir()
+    try:
+        input_path = save_upload(file, job_dir, extension)
+        check_signature(input_path, "office")
+        profile = (job_dir / "lo-profile").resolve().as_uri()
+        run_command([
+            LIBREOFFICE, f"-env:UserInstallation={profile}",
+            "--headless", "--convert-to", "pdf",
+            "--outdir", str(job_dir), str(input_path),
+        ])
+        output_path = job_dir / "input.pdf"
+        if not output_path.exists():
+            raise HTTPException(500, "Sorry, that file couldn't be converted.")
+    except Exception:
+        delete_job(job_dir)
+        raise
+
+    name = Path(file.filename).stem + ".pdf"
+    return send_result(output_path, name, "application/pdf", job_dir)
+
+
+@app.post("/powerpoint-to-pdf")
+def powerpoint_to_pdf(file: UploadFile = File(...)):
+    return office_to_pdf(file, (".ppt", ".pptx", ".odp"), "PowerPoint")
+
+
+@app.post("/excel-to-pdf")
+def excel_to_pdf(file: UploadFile = File(...)):
+    return office_to_pdf(file, (".xls", ".xlsx", ".ods"), "Excel")
 
 
 @app.post("/pdf-to-word")
@@ -232,24 +269,22 @@ def home():
     return page("index.html")
 
 
-@app.get("/word-to-pdf")
-def word_to_pdf_page():
-    return page("word-to-pdf.html")
+# Each tool page: address -> file in pages/
+TOOL_PAGES = [
+    "word-to-pdf", "pdf-to-word", "compress-pdf", "merge-pdf", "split-pdf", "jpg-to-pdf",
+    "powerpoint-to-pdf", "excel-to-pdf", "pdf-to-jpg", "rotate-pdf", "add-page-numbers",
+]
 
 
-@app.get("/pdf-to-word")
-def pdf_to_word_page():
-    return page("pdf-to-word.html")
+def make_page_route(slug: str):
+    def show_page():
+        return page(f"{slug}.html")
+    show_page.__name__ = f"page_{slug.replace('-', '_')}"
+    return show_page
 
 
-@app.get("/compress-pdf")
-def compress_pdf_page():
-    return page("compress-pdf.html")
-
-
-@app.get("/merge-pdf")
-def merge_pdf_page():
-    return page("merge-pdf.html")
+for slug in TOOL_PAGES:
+    app.get(f"/{slug}")(make_page_route(slug))
 
 
 @app.get("/robots.txt")

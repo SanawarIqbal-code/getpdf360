@@ -23,7 +23,7 @@
   <link rel="icon" href="/static/img/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png">
   <link rel="manifest" href="/static/site.webmanifest">
-  <link rel="stylesheet" href="/static/site.css?v=20261112b">
+  <link rel="stylesheet" href="/static/site.css?v=20261112d">
   <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Merge PDF", "url": "https://getpdf360.com/merge-pdf", "description": "Merge PDF files free online. Combine several PDFs into one in the order you choose. Runs in your browser, so your files are never uploaded. No sign-up.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any (web browser)", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "GBP"}, "publisher": {"@type": "Organization", "name": "GetPDF360", "url": "https://getpdf360.com/", "logo": "https://getpdf360.com/static/img/icon-512.png"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://getpdf360.com/"}, {"@type": "ListItem", "position": 2, "name": "Merge PDF", "item": "https://getpdf360.com/merge-pdf"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I merge PDF files for free?", "acceptedAnswer": {"@type": "Answer", "text": "Select two or more PDFs in the box above, put them in order, then press Merge. Download your combined PDF. There is no sign-up and no cost."}}, {"@type": "Question", "name": "Are my files uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No. Merging runs entirely in your browser, on your own device. Your PDFs never reach our server, so there is nothing to delete."}}, {"@type": "Question", "name": "Can I change the order of the files?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Drag the files into the order you want, or use the up and down arrows. You can also remove a file or add more before merging."}}, {"@type": "Question", "name": "Will the quality change?", "acceptedAnswer": {"@type": "Answer", "text": "No. Pages are copied exactly as they are, so text, images and links stay the same."}}, {"@type": "Question", "name": "Can I merge password-protected PDFs?", "acceptedAnswer": {"@type": "Answer", "text": "Not yet. Remove the password first, then merge the files."}}]}]}</script>
 </head>
 <body>
@@ -40,7 +40,7 @@
       </nav>
     </div>
     <div class="wrap switch-row">
-      <nav class="switch" aria-label="Choose a tool"><a href="/word-to-pdf">Word to PDF</a><a href="/pdf-to-word">PDF to Word</a><a href="/compress-pdf">Compress PDF</a><a href="/merge-pdf" aria-current="page">Merge PDF</a><span>Split PDF · soon</span><span>JPG to PDF · soon</span><span>PowerPoint to PDF · soon</span></nav>
+      <nav class="switch" aria-label="Choose a tool"><a href="/word-to-pdf">Word to PDF</a><a href="/pdf-to-word">PDF to Word</a><a href="/compress-pdf">Compress PDF</a><a href="/merge-pdf" aria-current="page">Merge PDF</a><a href="/split-pdf">Split PDF</a><a href="/jpg-to-pdf">JPG to PDF</a><a href="/pdf-to-jpg">PDF to JPG</a><a href="/powerpoint-to-pdf">PowerPoint to PDF</a><a href="/excel-to-pdf">Excel to PDF</a><a href="/rotate-pdf">Rotate PDF</a><a href="/add-page-numbers">Page numbers</a></nav>
     </div>
   </header>
   <main id="main">
@@ -115,7 +115,7 @@
     </section>
 
     <section class="band"><div class="wrap section faq"><h2>Merge PDF questions</h2><div class="faq-list"><div class="faq-item"><h3>How do I merge PDF files for free?</h3><p>Select two or more PDFs in the box above, put them in order, then press Merge. Download your combined PDF. There is no sign-up and no cost.</p></div><div class="faq-item"><h3>Are my files uploaded?</h3><p>No. Merging runs entirely in your browser, on your own device. Your PDFs never reach our server, so there is nothing to delete.</p></div><div class="faq-item"><h3>Can I change the order of the files?</h3><p>Yes. Drag the files into the order you want, or use the up and down arrows. You can also remove a file or add more before merging.</p></div><div class="faq-item"><h3>Will the quality change?</h3><p>No. Pages are copied exactly as they are, so text, images and links stay the same.</p></div><div class="faq-item"><h3>Can I merge password-protected PDFs?</h3><p>Not yet. Remove the password first, then merge the files.</p></div></div></div></section>
-    <section class="wrap section"><h2 style="font-size:24px;line-height:30px">More free tools</h2><div class="more"><a href="/word-to-pdf">Word to PDF</a><a href="/pdf-to-word">PDF to Word</a><a href="/compress-pdf">Compress PDF</a><span>Split PDF · soon</span><span>JPG to PDF · soon</span><span>PowerPoint to PDF · soon</span></div></section>
+    <section class="wrap section"><h2 style="font-size:24px;line-height:30px">More free tools</h2><div class="more"><a href="/word-to-pdf">Word to PDF</a><a href="/pdf-to-word">PDF to Word</a><a href="/compress-pdf">Compress PDF</a><a href="/split-pdf">Split PDF</a><a href="/jpg-to-pdf">JPG to PDF</a><a href="/pdf-to-jpg">PDF to JPG</a><a href="/powerpoint-to-pdf">PowerPoint to PDF</a><a href="/excel-to-pdf">Excel to PDF</a><a href="/rotate-pdf">Rotate PDF</a><a href="/add-page-numbers">Page numbers</a></div></section>
   </main>
   <footer class="site-footer">
     <div class="wrap foot">
@@ -127,17 +127,23 @@
         <nav aria-label="Convert to PDF">
           <strong>Convert to PDF</strong>
           <a href="/word-to-pdf">Word to PDF</a>
-          <span>JPG to PDF (soon)</span>
+          <a href="/powerpoint-to-pdf">PowerPoint to PDF</a>
+          <a href="/excel-to-pdf">Excel to PDF</a>
+          <a href="/jpg-to-pdf">JPG to PDF</a>
         </nav>
         <nav aria-label="Convert from PDF">
           <strong>Convert from PDF</strong>
           <a href="/pdf-to-word">PDF to Word</a>
+          <a href="/pdf-to-jpg">PDF to JPG</a>
           <span>PDF to Excel (soon)</span>
         </nav>
         <nav aria-label="Optimise PDF">
           <strong>Optimise PDF</strong>
           <a href="/compress-pdf">Compress PDF</a>
           <a href="/merge-pdf">Merge PDF</a>
+          <a href="/split-pdf">Split PDF</a>
+          <a href="/rotate-pdf">Rotate PDF</a>
+          <a href="/add-page-numbers">Add page numbers</a>
         </nav>
         <nav aria-label="GetPDF360">
           <strong>GetPDF360</strong>
@@ -149,7 +155,7 @@
       <p class="copy">© 2026 GetPDF360</p>
     </div>
   </footer>
-  <script src="/static/vendor/pdf-lib.min.js?v=20261112b" defer></script>
-  <script src="/static/merge.js?v=20261112b" defer></script>
+  <script src="/static/vendor/pdf-lib.min.js?v=20261112d" defer></script>
+  <script src="/static/merge.js?v=20261112d" defer></script>
 </body>
 </html>
