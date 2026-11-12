@@ -23,7 +23,7 @@
   <link rel="icon" href="/static/img/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png">
   <link rel="manifest" href="/static/site.webmanifest">
-  <link rel="stylesheet" href="/static/site.css?v=20261112d">
+  <link rel="stylesheet" href="/static/site.css?v=20261112g">
   <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Compress PDF", "url": "https://getpdf360.com/compress-pdf", "description": "Compress PDF files free online. Reduce PDF size for email and uploads in seconds, with no sign-up, no watermark and no limit. Files are deleted after download.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any (web browser)", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "GBP"}, "publisher": {"@type": "Organization", "name": "GetPDF360", "url": "https://getpdf360.com/", "logo": "https://getpdf360.com/static/img/icon-512.png"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://getpdf360.com/"}, {"@type": "ListItem", "position": 2, "name": "Compress PDF", "item": "https://getpdf360.com/compress-pdf"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I compress a PDF for free?", "acceptedAnswer": {"@type": "Answer", "text": "Choose a level, then select your PDF in the box above. It compresses straight away; then download the smaller file. There is no sign-up and no cost."}}, {"@type": "Question", "name": "How much smaller will my PDF be?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on what is inside. PDFs with photos or scans often shrink a lot; PDFs that are mostly text are already small and shrink less. You see the exact saving after compressing."}}, {"@type": "Question", "name": "Will the quality drop?", "acceptedAnswer": {"@type": "Answer", "text": "Text and lines stay sharp. Images are resized: Recommended looks good on screen, Strong is smallest but images look softer, and Light keeps the most detail."}}, {"@type": "Question", "name": "What if my PDF can't get any smaller?", "acceptedAnswer": {"@type": "Answer", "text": "If compressing would not make it smaller, we give you back your original file unchanged, so you never get a bigger file."}}, {"@type": "Question", "name": "Is it safe to upload my PDF?", "acceptedAnswer": {"@type": "Answer", "text": "Your upload is encrypted with HTTPS, processed on our server in London and deleted as soon as the smaller file is sent back to you."}}]}]}</script>
 </head>
 <body>
@@ -32,11 +32,13 @@
     <div class="wrap header-row">
       <a class="logo" href="/" aria-label="GetPDF360 home"><img src="/static/img/logo.svg" alt="GetPDF360" width="151" height="32"></a>
       <nav class="main-nav" aria-label="Main">
-        <a href="/#tools">All tools</a>
-        <a href="/word-to-pdf">Word to PDF</a>
-        <a href="/pdf-to-word">PDF to Word</a>
-        <a href="/compress-pdf">Compress PDF</a>
-        <a href="/merge-pdf">Merge PDF</a>
+        <details class="nav-menu">
+          <summary>All tools <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <div class="mega"><div class="mega-col"><p class="mega-head">Organise &amp; optimise</p><a href="/merge-pdf"><span class="ticon" style="background:#18225A"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFE04A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="10" height="13" rx="2"/><rect x="11" y="7" width="10" height="13" rx="2"/></svg></span><span>Merge PDF</span></a><a href="/split-pdf"><span class="ticon" style="background:#18225A"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFE04A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v4M6 3v18h12v-4"/><path d="M3 14h18" stroke-dasharray="2 2"/></svg></span><span>Split PDF</span></a><a href="/compress-pdf"><span class="ticon" style="background:#18225A"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFE04A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3v5H3M16 3v5h5M8 21v-5H3M16 21v-5h5"/></svg></span><span>Compress PDF</span></a><a href="/rotate-pdf"><span class="ticon" style="background:#18225A"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFE04A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></svg></span><span>Rotate PDF</span></a><a href="/add-page-numbers"><span class="ticon" style="background:#18225A"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFE04A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M11 14l1.5-1v5"/></svg></span><span>Add page numbers</span></a></div><div class="mega-col"><p class="mega-head">Convert to PDF</p><a href="/word-to-pdf"><span class="ticon" style="background:#E7EEFA"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5BA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg></span><span>Word to PDF</span></a><a href="/jpg-to-pdf"><span class="ticon" style="background:#E4F3F4"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F7C86" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg></span><span>JPG to PDF</span></a><a href="/powerpoint-to-pdf"><span class="ticon" style="background:#FCEBE4"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C2461F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M12 17v4M8 21h8M8 13V9h3a2 2 0 0 1 0 4H8"/></svg></span><span>PowerPoint to PDF</span></a><a href="/excel-to-pdf"><span class="ticon" style="background:#E4F3EA"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1F7A45" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span><span>Excel to PDF</span></a></div><div class="mega-col"><p class="mega-head">Convert from PDF</p><a href="/pdf-to-word"><span class="ticon" style="background:#E7EEFA"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2B5BA8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M8.5 12l1.5 6 2-4.5 2 4.5 1.5-6"/></svg></span><span>PDF to Word</span></a><a href="/pdf-to-jpg"><span class="ticon" style="background:#E4F3F4"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F7C86" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg></span><span>PDF to JPG</span></a></div><a class="mega-all" href="/#tools">See all tools →</a></div>
+        </details>
+        <a class="hide-sm" href="/compress-pdf">Compress PDF</a>
+        <a class="hide-sm" href="/merge-pdf">Merge PDF</a>
+        <a href="/guides">Guides</a>
       </nav>
     </div>
     <div class="wrap switch-row">
@@ -44,6 +46,7 @@
     </div>
   </header>
   <main id="main">
+  <script>document.addEventListener("click",function(e){document.querySelectorAll(".nav-menu[open]").forEach(function(d){if(!d.contains(e.target))d.open=false;});});document.addEventListener("keydown",function(e){if(e.key==="Escape")document.querySelectorAll(".nav-menu[open]").forEach(function(d){d.open=false;});});</script>
     <section class="wrap">
       <div class="hero">
         <span class="tool-mark"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFE04A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3v5H3M16 3v5h5M8 21v-5H3M16 21v-5h5"/></svg></span>
@@ -114,7 +117,7 @@
       <div class="foot-grid">
         <div>
           <img src="/static/img/logo-reverse.svg" alt="GetPDF360" width="132" height="28" loading="lazy">
-          <p>Free, private PDF tools. Files are converted in London and deleted after download.</p>
+          <p>Free, private PDF tools, made in the UK. Many tools never upload your file; the rest delete it after download.</p>
         </div>
         <nav aria-label="Convert to PDF">
           <strong>Convert to PDF</strong>
@@ -140,13 +143,18 @@
         <nav aria-label="GetPDF360">
           <strong>GetPDF360</strong>
           <a href="/">All tools</a>
-          <span>Privacy policy (soon)</span>
-          <span>Terms of use (soon)</span>
+          <a href="/guides">Guides</a>
+          <a href="/about">About</a>
+          <a href="/privacy">Privacy policy</a>
+          <a href="/terms">Terms of use</a>
+          <a href="https://github.com/SanawarIqbal-code/getpdf360" rel="noopener">Source code</a>
+          <a href="mailto:hello@getpdf360.com">hello@getpdf360.com</a>
         </nav>
       </div>
       <p class="copy">© 2026 GetPDF360</p>
     </div>
   </footer>
-  <script src="/static/converter.js?v=20261112d" defer></script>
+  <script src="/static/handoff.js?v=20261112g" defer></script>
+  <script src="/static/converter.js?v=20261112g" defer></script>
 </body>
 </html>

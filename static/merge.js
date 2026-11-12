@@ -184,4 +184,5 @@
   box.querySelector("[data-again]").addEventListener("click", function () {
     files = []; setStatus(""); show("pick"); input.focus();
   });
+  if (window.GPHandoff) GPHandoff.take().then(function (f) { if (f && f.length) addFiles(f); });
 })();

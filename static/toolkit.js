@@ -117,6 +117,7 @@ window.GP = (function () {
     if (rangeInput) rangeInput.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); run(); } });
     q("[data-change]").addEventListener("click", function () { current = null; setStatus(""); show("pick"); input.focus(); });
     q("[data-again]").addEventListener("click", function () { setStatus(""); show(current ? "options" : "pick"); });
+    if (window.GPHandoff) GPHandoff.take().then(function (f) { if (f && f.length) load(f[0]); });
     return api;
   }
 

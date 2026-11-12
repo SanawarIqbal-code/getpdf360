@@ -1,4 +1,5 @@
 import os
+import re
 import glob
 import time
 import uuid
@@ -285,6 +286,19 @@ def make_page_route(slug: str):
 
 for slug in TOOL_PAGES:
     app.get(f"/{slug}")(make_page_route(slug))
+
+# Information pages
+for slug in ["guides", "about", "privacy", "terms"]:
+    app.get(f"/{slug}")(make_page_route(slug))
+
+
+@app.get("/guides/{slug}")
+def guide(slug: str):
+    """A guide page. Only plain names like how-to-merge-pdf are allowed."""
+    path = PAGES_DIR / "guides" / f"{slug}.html"
+    if not re.fullmatch(r"[a-z0-9-]{1,80}", slug) or not path.is_file():
+        raise HTTPException(404, "Page not found.")
+    return FileResponse(path, media_type="text/html")
 
 
 @app.get("/robots.txt")

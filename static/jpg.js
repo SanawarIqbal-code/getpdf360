@@ -213,4 +213,5 @@
     items.forEach(function (it) { URL.revokeObjectURL(it.url); });
     items = []; setStatus(""); show("pick"); input.focus();
   });
+  if (window.GPHandoff) GPHandoff.take().then(function (f) { if (f && f.length) addFiles(f); });
 })();

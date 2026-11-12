@@ -180,4 +180,5 @@
   goBtn.addEventListener("click", run);
   box.querySelector("[data-change]").addEventListener("click", function () { current = null; setStatus(""); show("pick"); input.focus(); });
   box.querySelector("[data-again]").addEventListener("click", function () { setStatus(""); show(current ? "options" : "pick"); });
+  if (window.GPHandoff) GPHandoff.take().then(function (f) { if (f && f.length) load(f[0]); });
 })();
