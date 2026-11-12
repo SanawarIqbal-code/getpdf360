@@ -247,6 +247,11 @@ def compress_pdf_page():
     return page("compress-pdf.html")
 
 
+@app.get("/merge-pdf")
+def merge_pdf_page():
+    return page("merge-pdf.html")
+
+
 @app.get("/robots.txt")
 def robots():
     return FileResponse(STATIC_DIR / "robots.txt", media_type="text/plain")
