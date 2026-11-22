@@ -1,6 +1,6 @@
 # GetPDF360
 
-> Free, private online PDF tools from the UK. No sign-up, no watermark, no daily limit. Seven tools run entirely in the browser so files are never uploaded; the others delete files immediately after download.
+> Free, private online PDF tools. No sign-up, no watermark, no daily limit. Seven tools run entirely in the browser so files are never uploaded; the others delete files immediately after download.
 
 ## Tools
 - [Merge PDF](https://getpdf360.com/merge-pdf): Combine PDFs in the order you want
@@ -33,5 +33,4 @@
 - [About GetPDF360](https://getpdf360.com/about)
 - [Privacy policy](https://getpdf360.com/privacy)
 - [Terms of use](https://getpdf360.com/terms)
-- [Source code](https://github.com/SanawarIqbal-code/getpdf360)
 - Contact: hello@getpdf360.com
