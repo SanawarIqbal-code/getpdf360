@@ -1,12 +1,20 @@
 FROM python:3.12-slim
 
-# Install LibreOffice (Writer, Impress, Calc), Ghostscript and common fonts
+# Install LibreOffice (Writer, Impress, Calc, Draw), Ghostscript, OCR (Tesseract + languages),
+# Poppler (reads PDF pages) and common fonts
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
        libreoffice-writer \
        libreoffice-impress \
        libreoffice-calc \
+       libreoffice-draw \
        ghostscript \
+       poppler-utils \
+       tesseract-ocr \
+       tesseract-ocr-eng \
+       tesseract-ocr-urd \
+       tesseract-ocr-hin \
+       tesseract-ocr-ara \
        fonts-dejavu-core \
        fonts-liberation \
        fonts-crosextra-carlito \
@@ -17,7 +25,7 @@ WORKDIR /app
 
 # Install Python packages
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt python-pptx Pillow
 
 # Copy the app code, pages and images
 COPY app.py ./

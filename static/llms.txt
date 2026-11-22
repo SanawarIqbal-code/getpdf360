@@ -1,6 +1,6 @@
 # GetPDF360
 
-> Free, private online PDF tools from the UK. No sign-up, no watermark, no daily limit. Six tools run entirely in the browser so files are never uploaded; the others delete files immediately after download.
+> Free, private online PDF tools from the UK. No sign-up, no watermark, no daily limit. Seven tools run entirely in the browser so files are never uploaded; the others delete files immediately after download.
 
 ## Tools
 - [Merge PDF](https://getpdf360.com/merge-pdf): Combine PDFs in the order you want
@@ -14,6 +14,13 @@
 - [Excel to PDF](https://getpdf360.com/excel-to-pdf): Turn spreadsheets into PDF
 - [Rotate PDF](https://getpdf360.com/rotate-pdf): Fix sideways pages
 - [Add page numbers](https://getpdf360.com/add-page-numbers): Number pages for printing
+- [Edit PDF](https://getpdf360.com/edit-pdf): Add text, white-out, draw or sign
+- [OCR PDF](https://getpdf360.com/ocr-pdf): Scans and photos into editable text
+- [PDF to PowerPoint](https://getpdf360.com/pdf-to-powerpoint): Turn a PDF into PPTX slides
+- [Compress PDF to 100 KB](https://getpdf360.com/compress-pdf-to-100kb): shrink a PDF to under 100 KB for forms and uploads
+- [Compress PDF to 200 KB](https://getpdf360.com/compress-pdf-to-200kb): shrink a PDF to under 200 KB for forms and uploads
+- [Compress PDF to 500 KB](https://getpdf360.com/compress-pdf-to-500kb): shrink a PDF to under 500 KB for forms and uploads
+- [Compress PDF to 1 MB](https://getpdf360.com/compress-pdf-to-1mb): shrink a PDF to under 1 MB for forms and uploads
 
 ## Guides
 - [How to convert your CV to PDF](https://getpdf360.com/guides/how-to-convert-cv-to-pdf)

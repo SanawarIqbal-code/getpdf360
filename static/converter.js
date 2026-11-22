@@ -3,7 +3,8 @@
   var box = document.querySelector("[data-converter]");
   if (!box) return;
 
-  var MAX = 20 * 1024 * 1024;
+  var MAX_MB = parseInt(box.dataset.maxMb || "20", 10);
+  var MAX = MAX_MB * 1024 * 1024;
   var endpoint = box.dataset.endpoint;          // e.g. /word-to-pdf
   var accept = box.dataset.accept.split(",");    // e.g. .doc,.docx
   var outExt = box.dataset.out;                  // e.g. .pdf
@@ -32,6 +33,18 @@
     gone: box.querySelector("[data-step=gone]")
   };
   var blobUrl = null;
+  var badge = box.querySelector("[data-view=done] .result-badge");
+
+  // Options shown before choosing a file (radio buttons and drop-downs)
+  function choice(name) {
+    var el = box.querySelector("input[name=" + name + "]:checked") || box.querySelector("select[name=" + name + "]");
+    return el ? el.value : "";
+  }
+  var targetRow = box.querySelector("[data-target-row]");
+  function syncTarget() { if (targetRow) targetRow.hidden = choice("level") !== "target"; }
+  box.querySelectorAll("input[name=level]").forEach(function (r) { r.addEventListener("change", syncTarget); });
+  syncTarget();
+  function sizeLabel(kb) { return kb >= 1024 ? (kb / 1024) + " MB" : kb + " KB"; }
 
   function show(name) {
     Object.keys(views).forEach(function (k) { views[k].hidden = k !== name; });
@@ -86,7 +99,7 @@
       return;
     }
     if (file.size > MAX) {
-      setStatus("This file is " + size(file.size) + ". The limit is 20 MB.", true);
+      setStatus("This file is " + size(file.size) + ". The limit is " + MAX_MB + " MB.", true);
       return;
     }
 
@@ -98,8 +111,13 @@
     var started = new Date();
     var form = new FormData();
     form.append("file", file);
-    var level = box.querySelector("input[name=level]:checked");
-    if (level) form.append("level", level.value);
+    var sent = {};
+    box.querySelectorAll("[data-view=pick] input[type=radio]:checked, [data-view=pick] select[name]").forEach(function (el) {
+      if (el.name === "target" && choice("level") !== "target") return;
+      form.append(el.name, el.value);
+      sent[el.name] = el.value;
+    });
+    var ext = sent.output ? "." + sent.output : outExt;
 
     fetch(endpoint, { method: "POST", body: form })
       .then(function (response) {
@@ -109,11 +127,13 @@
           });
         }
         var jobId = response.headers.get("X-Job-Id");
-        return response.blob().then(function (blob) { return { blob: blob, jobId: jobId }; });
+        var met = response.headers.get("X-Target-Met");
+        return response.blob().then(function (blob) { return { blob: blob, jobId: jobId, met: met }; });
       })
       .then(function (res) {
         var finished = new Date();
-        var outName = file.name.replace(/\.[^.]+$/, "") + suffix + outExt;
+        var outName = file.name.replace(/\.[^.]+$/, "") + (ext === ".pdf" && sent.output ? "-searchable" : suffix) + ext;
+        if (badge) badge.textContent = ext.slice(1).toUpperCase();
         if (blobUrl) URL.revokeObjectURL(blobUrl);
         blobUrl = URL.createObjectURL(res.blob);
         link.href = blobUrl;
@@ -121,7 +141,12 @@
         linkText.textContent = "Download " + outName;
         resultName.textContent = outName;
         var secs = ((finished - started) / 1000).toFixed(1) + " seconds";
-        if (showSaving) {
+        if (showSaving && sent.level === "target") {
+          var want = sizeLabel(parseInt(sent.target, 10));
+          resultMeta.textContent = res.met === "1"
+            ? size(file.size) + " → " + size(res.blob.size) + " · under " + want + " ✓"
+            : "Smallest we could make: " + size(res.blob.size) + " (you asked for " + want + "). Try Split PDF to send fewer pages.";
+        } else if (showSaving) {
           var saved = Math.round((1 - res.blob.size / file.size) * 100);
           resultMeta.textContent = saved > 0
             ? size(file.size) + " → " + size(res.blob.size) + " · " + saved + "% smaller"

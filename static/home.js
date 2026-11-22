@@ -24,7 +24,11 @@
     word: ["/word-to-pdf", "Word to PDF", "Convert to PDF"],
     ppt: ["/powerpoint-to-pdf", "PowerPoint to PDF", "Convert to PDF"],
     excel: ["/excel-to-pdf", "Excel to PDF", "Convert to PDF"],
-    images: ["/jpg-to-pdf", "JPG to PDF", "Make one PDF"]
+    images: ["/jpg-to-pdf", "JPG to PDF", "Make one PDF"],
+    edit: ["/edit-pdf", "Edit PDF", "Add text or sign it"],
+    ocr: ["/ocr-pdf", "OCR PDF", "Get text from a scan"],
+    ocrimg: ["/ocr-pdf", "OCR (image to text)", "Get the words as text"],
+    toppt: ["/pdf-to-powerpoint", "PDF to PowerPoint", "Turn pages into slides"]
   };
 
   function kind(name) {
@@ -45,9 +49,9 @@
   }
 
   function choicesFor(k, count) {
-    if (k === "pdf") return count > 1 ? ["merge"] : ["compress", "toword", "split", "tojpg", "rotate", "numbers", "merge"];
+    if (k === "pdf") return count > 1 ? ["merge"] : ["compress", "toword", "edit", "split", "ocr", "tojpg", "toppt", "rotate", "numbers", "merge"];
     if (k === "word" || k === "ppt" || k === "excel") return count > 1 ? null : [k];
-    if (k === "images") return ["images"];
+    if (k === "images") return count === 1 && /\.(jpe?g|png)$/i.test(files[0].name) ? ["images", "ocrimg"] : ["images"];
     return null;
   }
 
