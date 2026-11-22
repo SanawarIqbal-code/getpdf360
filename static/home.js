@@ -109,3 +109,62 @@
     files = []; setStatus(""); choose.hidden = true; pick.hidden = false; input.focus();
   });
 })();
+
+// Tool filter tabs
+(function () {
+  var tabs = document.querySelectorAll("[data-filter]");
+  var cards = document.querySelectorAll(".tgrid [data-group]");
+  tabs.forEach(function (tab) {
+    tab.addEventListener("click", function () {
+      var f = tab.dataset.filter;
+      tabs.forEach(function (t) { t.setAttribute("aria-pressed", t === tab ? "true" : "false"); });
+      cards.forEach(function (c) { c.hidden = f !== "all" && c.dataset.group !== f; });
+    });
+  });
+})();
+
+// Share buttons
+(function () {
+  var copy = document.querySelector("[data-copy]");
+  if (copy) copy.addEventListener("click", function () {
+    var url = copy.dataset.copy;
+    var done = function () { copy.textContent = "Link copied ✓"; setTimeout(function () { copy.textContent = "Copy link"; }, 2000); };
+    if (navigator.clipboard) navigator.clipboard.writeText(url).then(done, function () { prompt("Copy this link:", url); });
+    else prompt("Copy this link:", url);
+  });
+  var native = document.querySelector("[data-native-share]");
+  if (native && navigator.share) {
+    native.hidden = false;
+    native.addEventListener("click", function () {
+      navigator.share({ title: "GetPDF360", text: "Free, private PDF tools. No sign-up.", url: "https://getpdf360.com/" }).catch(function () {});
+    });
+  }
+})();
+
+// Install as an app
+(function () {
+  var btn = document.querySelector("[data-install]");
+  var hint = document.querySelector("[data-install-hint]");
+  if (!btn) return;
+  var deferred = null;
+  var standalone = window.matchMedia("(display-mode: standalone)").matches || navigator.standalone;
+  if (standalone) { hint.textContent = "You're using the GetPDF360 app. Thanks for installing it!"; return; }
+  window.addEventListener("beforeinstallprompt", function (e) {
+    e.preventDefault();
+    deferred = e;
+    btn.hidden = false;
+  });
+  btn.addEventListener("click", function () {
+    if (!deferred) return;
+    deferred.prompt();
+    deferred.userChoice.finally(function () { deferred = null; btn.hidden = true; });
+  });
+  window.addEventListener("appinstalled", function () { btn.hidden = true; hint.textContent = "Installed! Find GetPDF360 on your home screen or desktop."; });
+  var ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  if (ios) hint.textContent = "On iPhone or iPad: tap the Share button in Safari, then \"Add to Home Screen\".";
+})();
+
+// Register the service worker (needed for "install as an app")
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () { navigator.serviceWorker.register("/sw.js").catch(function () {}); });
+}

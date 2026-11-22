@@ -1,0 +1,30 @@
+# GetPDF360
+
+> Free, private online PDF tools from the UK. No sign-up, no watermark, no daily limit. Six tools run entirely in the browser so files are never uploaded; the others delete files immediately after download.
+
+## Tools
+- [Merge PDF](https://getpdf360.com/merge-pdf): Combine PDFs in the order you want
+- [Split PDF](https://getpdf360.com/split-pdf): Take out pages or split every page
+- [Compress PDF](https://getpdf360.com/compress-pdf): Make PDFs smaller for email
+- [PDF to Word](https://getpdf360.com/pdf-to-word): Get an editable DOCX file
+- [Word to PDF](https://getpdf360.com/word-to-pdf): Turn DOC and DOCX into PDF
+- [PDF to JPG](https://getpdf360.com/pdf-to-jpg): Save pages as images
+- [JPG to PDF](https://getpdf360.com/jpg-to-pdf): Turn photos into one PDF
+- [PowerPoint to PDF](https://getpdf360.com/powerpoint-to-pdf): Turn slides into a PDF
+- [Excel to PDF](https://getpdf360.com/excel-to-pdf): Turn spreadsheets into PDF
+- [Rotate PDF](https://getpdf360.com/rotate-pdf): Fix sideways pages
+- [Add page numbers](https://getpdf360.com/add-page-numbers): Number pages for printing
+
+## Guides
+- [How to convert your CV to PDF](https://getpdf360.com/guides/how-to-convert-cv-to-pdf)
+- [How to make a PDF smaller for email](https://getpdf360.com/guides/how-to-make-pdf-smaller-for-email)
+- [How to combine PDF files on iPhone](https://getpdf360.com/guides/how-to-combine-pdf-files-on-iphone)
+- [How to turn photos of notes into one PDF](https://getpdf360.com/guides/how-to-turn-photos-of-notes-into-pdf)
+- [How to add page numbers to your dissertation](https://getpdf360.com/guides/how-to-add-page-numbers-to-dissertation)
+
+## About
+- [About GetPDF360](https://getpdf360.com/about)
+- [Privacy policy](https://getpdf360.com/privacy)
+- [Terms of use](https://getpdf360.com/terms)
+- [Source code](https://github.com/SanawarIqbal-code/getpdf360)
+- Contact: hello@getpdf360.com

@@ -1,0 +1,8 @@
+# Caddyfile for the server: www redirects permanently (301) to the main address
+www.getpdf360.com {
+    redir https://getpdf360.com{uri} permanent
+}
+
+getpdf360.com {
+    reverse_proxy getpdf360:8000
+}

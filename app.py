@@ -8,7 +8,8 @@ import threading
 import subprocess
 from pathlib import Path
 
-from fastapi import FastAPI, UploadFile, File, Form, HTTPException
+from fastapi import FastAPI, UploadFile, File, Form, HTTPException, Request
+from starlette.exceptions import HTTPException as StarletteHTTPException
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.background import BackgroundTask
@@ -49,6 +50,15 @@ WORK_DIR.mkdir(exist_ok=True)
 # docs_url=None hides the /docs test page from the public
 app = FastAPI(title="GetPDF360", docs_url=None, redoc_url=None, openapi_url=None)
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+
+
+# ---------- Friendly 404 page ----------
+@app.exception_handler(StarletteHTTPException)
+async def http_error(request: Request, exc: StarletteHTTPException):
+    """Show a branded page for unknown addresses; keep JSON errors for the tools."""
+    if exc.status_code == 404 and request.method == "GET" and not request.url.path.startswith("/api/"):
+        return FileResponse(PAGES_DIR / "404.html", status_code=404, media_type="text/html")
+    return JSONResponse({"detail": exc.detail}, status_code=exc.status_code, headers=getattr(exc, "headers", None))
 
 
 # ---------- Helpers ----------
@@ -309,6 +319,19 @@ def robots():
 @app.get("/sitemap.xml")
 def sitemap():
     return FileResponse(STATIC_DIR / "sitemap.xml", media_type="application/xml")
+
+
+@app.get("/llms.txt")
+def llms_txt():
+    """Plain-text summary of the site for AI assistants."""
+    return FileResponse(STATIC_DIR / "llms.txt", media_type="text/plain; charset=utf-8")
+
+
+@app.get("/sw.js")
+def service_worker():
+    """Served from the site root so the app can be installed."""
+    return FileResponse(STATIC_DIR / "sw.js", media_type="text/javascript",
+                        headers={"Cache-Control": "no-cache", "Service-Worker-Allowed": "/"})
 
 
 @app.get("/favicon.ico")
