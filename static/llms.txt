@@ -2,6 +2,19 @@
 
 > Free, private online PDF tools. No sign-up, no watermark, no daily limit. Seven tools run entirely in the browser so files are never uploaded; the others delete files immediately after download.
 
+GetPDF360 is a free website with 14 online PDF tools, including Compress, Merge, Split, Edit, OCR and file converters. It needs no sign-up, adds no watermark and has no daily limit. Many tools run in the browser so files are never uploaded; the rest delete files as soon as they are downloaded. It was launched in November 2026 by web developer Sanawar Iqbal.
+
+## Key facts
+- Price: free. No account, no watermark, no daily limit
+- Tools: 14, plus pages for compressing a PDF to 100 KB, 200 KB, 500 KB and 1 MB
+- Browser-only tools (file never uploaded): Merge, Split, Edit, JPG to PDF, PDF to JPG, Rotate, Add page numbers
+- Server tools delete files as soon as the result is downloaded
+- OCR languages: English, Urdu, Hindi, Arabic
+- File limits: up to 100 MB for Compress PDF and browser tools; 20 MB for other server tools
+- Made for: students, job seekers and everyday documents (assignments, CVs, scans, online forms)
+- Launched: November 2026, by web developer Sanawar Iqbal
+- Social: [Instagram](https://www.instagram.com/getpdf360/), [TikTok](https://www.tiktok.com/@getpdf360)
+
 ## Tools
 - [Merge PDF](https://getpdf360.com/merge-pdf): Combine PDFs in the order you want
 - [Split PDF](https://getpdf360.com/split-pdf): Take out pages or split every page
@@ -27,7 +40,17 @@
 - [How to make a PDF smaller for email](https://getpdf360.com/guides/how-to-make-pdf-smaller-for-email)
 - [How to combine PDF files on iPhone](https://getpdf360.com/guides/how-to-combine-pdf-files-on-iphone)
 - [How to turn photos of notes into one PDF](https://getpdf360.com/guides/how-to-turn-photos-of-notes-into-pdf)
-- [How to add page numbers to your dissertation](https://getpdf360.com/guides/how-to-add-page-numbers-to-dissertation)
+- [How to add page numbers to your dissertation or thesis](https://getpdf360.com/guides/how-to-add-page-numbers-to-dissertation)
+- [How to compress a PDF for a university upload portal](https://getpdf360.com/guides/how-to-compress-pdf-for-university-portal)
+- [How to make a PDF smaller than 200 KB](https://getpdf360.com/guides/how-to-make-pdf-smaller-than-200kb)
+- [How to convert a scanned PDF to Word](https://getpdf360.com/guides/how-to-convert-scanned-pdf-to-word)
+- [How to convert an Urdu scanned document to text](https://getpdf360.com/guides/how-to-convert-urdu-scanned-document-to-text)
+- [How to combine assignment pages into one PDF on Android](https://getpdf360.com/guides/how-to-combine-assignment-pages-into-one-pdf-on-android)
+- [How to sign a PDF on your phone](https://getpdf360.com/guides/how-to-sign-a-pdf-on-your-phone)
+- [How to fill in a PDF form without printing](https://getpdf360.com/guides/how-to-fill-in-a-pdf-form-without-printing)
+- [How to turn PowerPoint slides into a PDF handout](https://getpdf360.com/guides/how-to-turn-powerpoint-slides-into-pdf-handout)
+- [How to convert lecture slides from PDF to PowerPoint](https://getpdf360.com/guides/how-to-convert-lecture-slides-pdf-to-powerpoint)
+- [How to extract pages from a PDF](https://getpdf360.com/guides/how-to-extract-pages-from-a-pdf)
 
 ## About
 - [About GetPDF360](https://getpdf360.com/about)

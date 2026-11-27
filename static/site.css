@@ -467,3 +467,13 @@ a.tc:hover .tc-arrow { color: var(--navy); transform: translateX(2px); }
   .ed-tool { padding: 0 11px; }
   .ed-save { margin-left: 0; flex: 1 1 100%; }
 }
+
+/* ---- Footer social links, receipt label, "What is" block ---- */
+.social { display: flex; gap: 10px; margin-top: 16px; }
+.social a { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 12px; background: rgba(255,255,255,.08); color: #fff; }
+.social a:hover { background: rgba(255,255,255,.16); }
+.social a:focus-visible { outline: 3px solid #FFE04A; outline-offset: 2px; }
+.receipt .receipt-title { margin: 0; font-size: 15px; font-weight: 700; color: var(--ink-soft); }
+.what-is p, .what-is h2 { max-width: 760px; }
+.what-is h2 { font-size: 28px; line-height: 34px; margin: 0 0 12px; }
+.what-is p { font-size: 17px; line-height: 1.6; color: var(--ink-soft); margin: 0 0 12px; }
